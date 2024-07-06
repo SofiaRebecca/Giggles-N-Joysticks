@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        header {
+      font-family: 'Courier New', Courier, monospace, Geneva, Tahoma, sans-serif;
+      background-color: #01314e;
+      padding: 10px;
+      text-align: center;
+      color: white;
+      
+    }
+
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        td {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-size: 18px;
+            border: 1px solid #ccc;
+        }
+
+        input {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-size: 16px;
+            border: none;
+            outline: none;
+        }
+
+        #checkBtn {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+        }
+
+        #result {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header align="top" >
+        
+        <img src="C:\Users\Sharon Zachariah\OneDrive\Desktop\games website\img\sudoku.jpg" height= "80px" width= "80px" align="left"/>
+      <br/> 
+      <h1>SUDOKU</h1>
+    <table id="sudokuBoard"></table>
+    <button id="checkBtn" onclick="checkSolution()">Check</button>
+    <div id="result"></div>
+
+    <script>
+        var sudokuBoard = [
+            [5, 3, '', '', 7, '', '', '', ''],
+            [6, '', '', 1, 9, 5, '', '', ''],
+            ['', 9, 8, '', '', '', '', 6, ''],
+            [8, '', '', '', 6, '', '', '', 3],
+            [4, '', '', 8, '', 3, '', '', 1],
+            [7, '', '', '', 2, '', '', '', 6],
+            ['', 6, '', '', '', '', 2, 8, ''],
+            ['', '', '', 4, 1, 9, '', '', 5],
+            ['', '', '', '', 8, '', '', 7, 9]
+        ];
+
+        function renderBoard() {
+            var table = document.getElementById('sudokuBoard');
+            table.innerHTML = '';
+
+            for (let i = 0; i < 9; i++) {
+                var row = document.createElement('tr');
+                for (let j = 0; j < 9; j++) {
+                    var cell = document.createElement('td');
+                    var inputValue = sudokuBoard[i][j] === '' ? '' : sudokuBoard[i][j];
+                    var input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = inputValue;
+                    input.setAttribute('data-row', i);
+                    input.setAttribute('data-col', j);
+                    input.addEventListener('input', function() { onInputChange(this); });
+                    cell.appendChild(input);
+                    row.appendChild(cell);
+                }
+                table.appendChild(row);
+            }
+        }
+
+        function onInputChange(input) {
+            var row = parseInt(input.getAttribute('data-row'));
+            var col = parseInt(input.getAttribute('data-col'));
+            var value = parseInt(input.value) || '';
+
+            sudokuBoard[row][col] = value;
+        }
+
+        function checkSolution() {
+            var isCorrect = true;
+
+            for (let i = 0; i < 9; i++) {
+                for (let j = 0; j < 9; j++) {
+                    if (sudokuBoard[i][j] !== '') {
+                        if (!isValid(i, j, sudokuBoard[i][j])) {
+                            isCorrect = false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            displayResult(isCorrect ? 'Correct solution!' : 'Incorrect solution!');
+        }
+
+        function isValid(row, col, value) {
+            // Check row and column
+            for (let i = 0; i < 9; i++) {
+                if (i !== col && sudokuBoard[row][i] === value) return false;
+                if (i !== row && sudokuBoard[i][col] === value) return false;
+            }
+
+            // Check 3x3 grid
+            var gridRow = Math.floor(row / 3) * 3;
+            var gridCol = Math.floor(col / 3) * 3;
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    if (gridRow + i !== row && gridCol + j !== col && sudokuBoard[gridRow + i][gridCol + j] === value) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        function displayResult(message) {
+            var resultElement = document.getElementById('result');
+            resultElement.textContent = message;
+        }
+
+        // Initial setup
+        renderBoard();
+    </script>
+    <form>
+        <input type="button" value="Go back!" onclick="history.back()">
+       </form>
+</body>
+</html>

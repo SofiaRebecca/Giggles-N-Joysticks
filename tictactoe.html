@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe with Computer</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        header {
+      font-family: 'Courier New', Courier, monospace, Geneva, Tahoma, sans-serif;
+      background-color: #01314e;
+      padding: 10px;
+      text-align: center;
+      color: white;
+      
+    }
+
+        #gameBoard {
+            display: grid;
+            grid-template-columns: repeat(3, 80px);
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        .cell {
+            width: 80px;
+            height: 80px;
+            font-size: 24px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #ccc;
+        }
+
+        #result {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        #playAgainBtn {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <header align="top" >
+        
+        <img src="C:\Users\Sharon Zachariah\OneDrive\Desktop\games website\img\tictactoe.jpg" height= "80px" width= "80px" align="left"/>
+      <br/> 
+      <h1>TIC TAC TOE</h1>
+        
+
+    <div id="gameBoard"></div>
+    <div id="result"></div>
+    <button id="playAgainBtn" onclick="playAgain()">Play Again</button>
+
+    <script>
+        var board = ['', '', '', '', '', '', '', '', ''];
+        var currentPlayer = 'X';
+        var gameInProgress = true;
+
+        function renderBoard() {
+            var gameBoard = document.getElementById('gameBoard');
+            gameBoard.innerHTML = '';
+
+            for (let i = 0; i < board.length; i++) {
+                var cell = document.createElement('div');
+                cell.className = 'cell';
+                cell.textContent = board[i];
+                cell.addEventListener('click', function() { makeMove(i); });
+
+                gameBoard.appendChild(cell);
+            }
+        }
+
+        function makeMove(index) {
+            if (gameInProgress && board[index] === '') {
+                board[index] = currentPlayer;
+                renderBoard();
+
+                if (checkGameOver()) {
+                    displayResult(currentPlayer === 'X' ? 'You win!' : 'Computer wins!');
+                    gameInProgress = false;
+                    return;
+                }
+
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+
+                if (currentPlayer === 'O') {
+                    setTimeout(makeComputerMove, 500); // Delay computer move for better user experience
+                }
+            }
+        }
+
+        function makeComputerMove() {
+            if (gameInProgress) {
+                var emptyCells = getEmptyCells();
+                var computerMove = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+                board[computerMove] = currentPlayer;
+                renderBoard();
+
+                if (checkGameOver()) {
+                    displayResult(currentPlayer === 'X' ? 'You win!' : 'Computer wins!');
+                    gameInProgress = false;
+                    return;
+                }
+
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            }
+        }
+
+        function checkGameOver() {
+            // Check for a win or a tie
+            if (checkWin('X') || checkWin('O') || checkTie()) {
+                return true;
+            }
+
+            return false;
+        }
+
+        function checkWin(player) {
+            // Check rows, columns, and diagonals for a win
+            if (
+                (board[0] === player && board[1] === player && board[2] === player) ||
+                (board[3] === player && board[4] === player && board[5] === player) ||
+                (board[6] === player && board[7] === player && board[8] === player) ||
+                (board[0] === player && board[3] === player && board[6] === player) ||
+                (board[1] === player && board[4] === player && board[7] === player) ||
+                (board[2] === player && board[5] === player && board[8] === player) ||
+                (board[0] === player && board[4] === player && board[8] === player) ||
+                (board[2] === player && board[4] === player && board[6] === player)
+            ) {
+                return true;
+            }
+
+            return false;
+        }
+
+        function checkTie() {
+            // Check for a tie
+            for (let i = 0; i < board.length; i++) {
+                if (board[i] === '') {
+                    return false; // If any cell is empty, the game is not a tie
+                }
+            }
+
+            return true; // All cells are filled, it's a tie
+        }
+
+        function getEmptyCells() {
+            // Get indices of empty cells
+            var emptyCells = [];
+            for (let i = 0; i < board.length; i++) {
+                if (board[i] === '') {
+                    emptyCells.push(i);
+                }
+            }
+            return emptyCells;
+        }
+
+        function displayResult(message) {
+            var resultElement = document.getElementById('result');
+            resultElement.textContent = message;
+        }
+
+        function playAgain() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            currentPlayer = 'X';
+            gameInProgress = true;
+            renderBoard();
+            document.getElementById('result').textContent = '';
+        }
+
+        // Initial setup
+        renderBoard();
+    </script>
+    <form>
+        <input type="button" value="Go back!" onclick="history.back()">
+       </form>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Hangman Game</title>
+	<style>
+		body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+header {
+      font-family: 'Courier New', Courier, monospace, Geneva, Tahoma, sans-serif;
+      background-color: #01314e;
+      padding: 10px;
+      text-align: center;
+      color: white;
+      
+    }
+
+#hangman-container {
+    text-align: center;
+}
+
+#word-container {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+#incorrect-guesses {
+    font-weight: bold;
+    color: red;
+}
+
+button {
+    font-size: 1.5em;
+    margin: 5px;
+}
+
+	
+	</style>
+</head>
+<body>
+    <header align="top" >
+        
+        <img src="C:\Users\Sharon Zachariah\OneDrive\Desktop\games website\img\hangman.jpg" height= "80px" width= "80px" align="left"/>
+      <br/> 
+      <h1>Hangman</h1>
+        
+      </header>
+    <div id="hangman-container">
+        <div id="word-container"></div>
+        <div id="guesses-container">
+            <p>Incorrect Guesses: <span id="incorrect-guesses"></span></p>
+        </div>
+        <div id="buttons-container"></div>
+    </div>
+    <script >
+	document.addEventListener('DOMContentLoaded', function() {
+    const words = ['hangman', 'computer', 'javascript', 'programming', 'web'];
+    let chosenWord = words[Math.floor(Math.random() * words.length)];
+    let guessedWord = Array(chosenWord.length).fill('_');
+    let incorrectGuesses = [];
+
+    const wordContainer = document.getElementById('word-container');
+    const incorrectGuessesContainer = document.getElementById('incorrect-guesses');
+    const buttonsContainer = document.getElementById('buttons-container');
+
+    function updateDisplay() {
+        wordContainer.textContent = guessedWord.join(' ');
+        incorrectGuessesContainer.textContent = incorrectGuesses.join(', ');
+    }
+
+    function checkWin() {
+        if (!guessedWord.includes('_')) {
+            alert('Congratulations! You guessed the word!');
+            resetGame();
+        }
+    }
+
+    function checkLoss() {
+        if (incorrectGuesses.length >= 6) {
+            alert('Sorry! You ran out of attempts. The word was: ' + chosenWord);
+            resetGame();
+        }
+    }
+
+    function makeGuess(letter) {
+        if (chosenWord.includes(letter)) {
+            for (let i = 0; i < chosenWord.length; i++) {
+                if (chosenWord[i] === letter) {
+                    guessedWord[i] = letter;
+                }
+            }
+            checkWin();
+        } else {
+            incorrectGuesses.push(letter);
+            checkLoss();
+        }
+        updateDisplay();
+    }
+
+    function resetGame() {
+        chosenWord = words[Math.floor(Math.random() * words.length)];
+        guessedWord = Array(chosenWord.length).fill('_');
+        incorrectGuesses = [];
+        updateDisplay();
+    }
+
+    for (let i = 65; i <= 90; i++) {
+        const letter = String.fromCharCode(i);
+        const button = document.createElement('button');
+        button.textContent = letter;
+        button.addEventListener('click', function() {
+            makeGuess(letter.toLowerCase());
+        });
+        buttonsContainer.appendChild(button);
+    }
+
+    updateDisplay();
+});
+
+	
+	</script>
+    <form>
+        <input type="button" value="Go back!" onclick="history.back()">
+       </form>
+</body>
+</html>

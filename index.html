@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giggles N Joysticks</title>
+  <style>
+      body {
+      font-family: cursive, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-clip: border-box;
+      
+    
+    }
+
+    header {
+      font-family: 'Courier New', Courier, monospace, Geneva, Tahoma, sans-serif;
+      background-color: #01314e;
+      padding: 10px;
+      text-align: center;
+      color: white;
+    }
+
+    nav {
+      background-color: #0e7279;
+      overflow: hidden;
+    }
+
+    nav a {
+      float: left;
+      display: block;
+      color: rgb(255, 255, 255);
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      background-color: #9ed6d9;
+      color: black;
+    }
+
+    .columns-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin: 20px;
+    }
+
+    .column5 {
+      width: 30%;
+      background-color: rgb(181, 98, 60);
+      color: beige;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out;
+    }
+    .column1 {
+      width: 30%;
+      background-color: rgb(196, 46, 113);
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      color:beige;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out;
+    }
+    .column2 {
+      width: 30%;
+      background-color: rgb(225, 215, 104);
+      color: black;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out;
+    }
+    .column3 {
+      width: 30%;
+      background-color: rgb(17, 128, 61);
+      color: beige;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out;
+    }
+    .column4 {
+      width: 30%;
+      background-color: rgb(124, 77, 150);
+      color: beige;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out;
+    }
+    .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 16px;  
+            border: none;
+            outline: none;
+            color: #fff;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #555;
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+    .dropdown-content a:hover {
+            background-color: #ddd;
+            color: green;
+        }
+
+   .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    .column:hover {
+      transform: scale(1.05);
+    }
+
+    .game-description {
+      padding: 20px;
+    }
+    .video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Set z-index to be behind other elements */
+      overflow: hidden;
+    }
+    .video-container video {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+   
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+    form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+  </style>
+</head>
+<body>
+  <div class="video-container">
+    <video autoplay muted loop>
+      <source src="C:\Users\Sharon Zachariah\OneDrive\Desktop\games website\img\bgvid.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <header>
+	<img src="C:\Users\Sharon Zachariah\OneDrive\Desktop\games website\img\WhatsApp Image 2023-12-24 at 7.32.02 PM.jpeg" height= "80px" width= "80px" align="left"/>
+  <br/> 
+  <h1>Giggles N Joysticks</h1>
+	
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    
+    <div class="dropdown">
+      <button class="dropbtn">Games</button>
+      <div class="dropdown-content">
+          <a href="hangman.html">Hangman</a>
+          <a href="pong.html">Ping Pong</a>
+          <a href="snl.html">Snake</a>
+          <a href="sudoku.html">Sudoku</a>
+          <a href="tictactoe.html">Tic Tac Toe</a>
+         
+      </div>
+      
+      <a href="rating.html">Rating</a>
+  </nav>
+
+  <div class="columns-container">
+    <div class="column1">
+      <div class="game-description">
+        <img src="C:\Users\Sharon Zachariah\OneDrive\Desktop\games website\img\tictactoe.jpg" height="70px" width="70px" align="left"/>
+        <h2>Tic Tac Toe</h2>
+		    <p>The game is played on a grid that's 3 squares by 3 squares. You are X , your friend (or the computer in this case) is O . Players take turns putting their marks in empty squares. The first player to get 3 of her marks in a row (up, down, across, or diagonally) is the winner..</p>
+      </div>
+    </div>
+
+    <div class="column2">
+      <div class="game-description">
+        <img src="C:\Users\Sharon Zachariah\OneDrive\Desktop\games website\img\ping-pong.jpg"  height="70px" width="70px" align="left"/>
+        <h2>Ping Pong</h2>
+        <p>The game involves two paddles and a moving ball. The players have to move paddles in an upwards or downward direction and save the ball from getting hit by the wall. If the ball hits the wall then it’s a score for another player.</p>
+      </div>
+    </div>
+
+    <div class="column3">
+      <div class="game-description">
+        <img src = "C:\Users\Sharon Zachariah\OneDrive\Desktop\games website\img\sna.jpg" height="70px" width="70px" align="left"/>
+        <h2>Snake</h2>
+        <p>The player must keep the snake from colliding with both other obstacles and itself, which gets harder as the snake lengthens.</p>
+      </div>
+    </div>
+
+    <div class="column4">
+      <div class="game-description">
+        <img src="C:\Users\Sharon Zachariah\OneDrive\Desktop\games website\img\hangman.jpg"height="70px" width="70px" align="left"/>
+         <h2>Hangman</h2>
+        <p>Guess the word using using the character set given. Five wrong guesses and you lose! Keep guessing and winning</p>
+      </div>
+    </div>
+
+    <div class="column5">
+      <div class="game-description">
+        <img src ="C:\Users\Sharon Zachariah\OneDrive\Desktop\games website\img\sudoku.jpg" height="70px" width="70px" align="left"/>
+        <h2>Sudoku</h2>
+        <p>A 9×9 square must be filled in with numbers from 1-9 with no repeated numbers in each line, horizontally or vertically. To challenge you more, there are 3×3 squares marked out in the grid, and each of these squares can't have any repeat numbers either.</p>
+      </div>
+    </div>
+  </div>
+  <form id="accountForm">
+    <h2>Create an Account</h2>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="button" onclick="createAccount()">Create Account</button>
+</form>
+
+<script>
+    function createAccount() {
+        alert("Account created successfully!");
+    }
+</script>
+  <footer>
+    <p>&copy; 2023 Giggles N Joysticks. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
