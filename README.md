@@ -13,15 +13,6 @@ Giggles N Joysticks is a gaming website designed to offer a diverse range of gam
 - **Interactive Rating System:** Users can rate their gaming experience.  
 - **Easy Navigation:** Includes an **index page** to browse games seamlessly.  
 
-## 📂 Project Structure 
-/giggles-n-joysticks │── index.html # Home page
-│── rating.html # Rating system
-│── games/ # Game files
-│── assets/ # Images & other assets
-│── styles/ # CSS files
-│── scripts/ # Game logic (if applicable)
-│── README.md # Project documentation
-
 ## 💻 Setup  
 1. Clone the repository:  
    ```sh
